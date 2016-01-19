@@ -1,0 +1,56 @@
+# Commands
+
+- gpg --gen-key
+- Enter passphrase:
+
+- Listando chaves 
+	- gpg --list-keys
+
+- Exportando uma chave pública
+	- gpg --output uira.gpg --export uiraribeiro@terra.com.br
+
+- Importar uma chave pública de outra pessoa
+	- gpg --import "nome da pessoa".gpg
+
+- Apartir do momento que a chave for importada, é necessário 
+fazer a verificação de sua assinatura digital:
+
+	- gpg --edit-key "nome da pessoa"@terra.com.br (como exemplo)
+	
+2)Command> fpr
+
+- Agora, você precisa assinar a chave importada com a sua chave:
+
+	- gpg --edit-key "nome da pessoa"@terra.com.br (como exemplo) 	
+
+Command> sign
+
+- Para criptografar um arquivo para enviar para uma determinada pessoa,
+você deverá ter a chave da pessoa importada e verificada.
+- O argumento "-encrypt" é usado para criptografar os dados:
+
+	- gpg --output documento.gpg --encrypt -recipient "nome da pessoa"@terra.com.br documento.pdf
+
+- Conforme mencionamos no comando acima, o documento.gpg somente poderá ser decriptado pela "nome da pessoa" que possui a chave privada.
+
+- Somente a pessoa "nome da pessoa" poderá decriptar o arquivo em questão com o comando abaixo:
+	- gpg --output arquivo.pdf --decrypt documento.gpg
+	- Enter Passphrase:
+
+- Assinando Documentos
+	- gpg --output documento.sig --sign documento.pdf
+
+Obs: O arquivo será comprimido e a assinatura será incluída ao documento e poderá ser visualizado por qualquer pessoa que possua sua chave pública.
+
+As pessoas pode´rão visualizar sua assinatura com o seguinte comando:
+
+	- gpg --output documento.pdf --decrypt documento.sig
+
+- Assinatura de mensagens / emails
+	
+	- gpg --clearsign doc
+
+Obs: A assinatura digital será adicionada ao documento ou email em questão.  
+
+
+
